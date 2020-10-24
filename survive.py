@@ -7,7 +7,9 @@ black = 255, 255, 255
 
 screen = pygame.display.set_mode(size)
 
-ball = pygame.image.load("artkit.png")
+badGuy = "tile036.png"
+
+ball = pygame.image.load(badGuy)
 ballrect = ball.get_rect()
 
 while 1:
