@@ -1,22 +1,28 @@
-import sys, pygame, random
+import sys, pygame, random, time
 pygame.init()
+
 
 # Screen Setup
 size = width, height = 800,600
 playerSpeed = 5
 white = 255, 255, 255
 screen = pygame.display.set_mode(size)
+cobbleStone = "tile012.png"
+background = pygame.image.load(cobbleStone)
+background = pygame.transform.scale(background, (800, 600))
+start_time = time.time()
+
 
 # Character Setup
 class Enemy:
     def __init__(self):
-        self.imageName = "tile036.png"
+        self.imageName = "tile033.png"
         self.loadedImage = pygame.image.load(self.imageName)
         self.image_rect = self.loadedImage.get_rect()
         self.speed = [0,0]
 enemy1 = Enemy()
 
-lance = "tile024.png"
+lance = "tile027.png"
 lance = pygame.image.load(lance)
 lance_rect = lance.get_rect()
 
@@ -57,10 +63,19 @@ def enemySpawn(enemy1, width, height, OFFSCREENDISTANCE):
 enemySpawn(enemy1, width, height, OFFSCREENDISTANCE)
 justSpawned = True
 # Main
-#def main(screen, enemy1, lance, lance_rect, justSpawned, width, height, playerSpeed, white):
+#def main(screen, enemy1, lance, lance_rect, justSpawned, width, height, playerSpeed, white, OFFSCREENDISTANCE):
 while 1:
     for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
+        if event.type == pygame.QUIT:
+            score = str(round(float(time.time()-start_time),3))
+            font = pygame.font.Font('freesansbold.ttf', 108)
+            text = font.render("Score: " + score, True, white)
+            textRect = text.get_rect()
+            textRect.center = (width // 2, height // 2)
+            screen.blit(text, textRect)
+            pygame.display.update()
+            time.sleep(5)
+            sys.exit()
 
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_LEFT and lance_rect.centerx > 0:
@@ -83,10 +98,11 @@ while 1:
         justSpawned = True
 
     screen.fill(white)
+    screen.blit(background, (0,0))
     screen.blit(lance, lance_rect)
     screen.blit(enemy1.loadedImage, enemy1.image_rect)
     pygame.display.flip()
     
     
 """ while 1:
-    main(screen, enemy1, lance, lance_rect, justSpawned, width, height, playerSpeed, white) """
+    main(screen, enemy1, lance, lance_rect, justSpawned, width, height, playerSpeed, white, OFFSCREENDISTANCE) """
