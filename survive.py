@@ -21,6 +21,7 @@ class Enemy:
         self.image_rect = self.loadedImage.get_rect()
         self.speed = [0,0]
 enemy1 = Enemy()
+enemy2 = Enemy()
 
 lance = "tile027.png"
 lance = pygame.image.load(lance)
@@ -32,7 +33,7 @@ lance_rect.centerx = width/2
 lance_rect.centery = height/2
 
 OFFSCREENDISTANCE = 30
-def enemySpawn(enemy1, width, height, OFFSCREENDISTANCE):
+def enemySpawn(enemy, width, height, OFFSCREENDISTANCE):
     spawnSide = random.randint(0,3)
     OFFSCREENDISTANCE = 30
     if spawnSide == 0:
@@ -56,12 +57,14 @@ def enemySpawn(enemy1, width, height, OFFSCREENDISTANCE):
         speedX = random.randint(-3,3)
         speedY = random.randint(-6,-1)
 
-    enemy1.image_rect.centerx = enemySpawnx
-    enemy1.image_rect.centery = enemySpawny
-    enemy1.speed = [speedX,speedY]
+    enemy.image_rect.centerx = enemySpawnx
+    enemy.image_rect.centery = enemySpawny
+    enemy.speed = [speedX,speedY]
 
 enemySpawn(enemy1, width, height, OFFSCREENDISTANCE)
-justSpawned = True
+enemySpawn(enemy2, width, height, OFFSCREENDISTANCE)
+enemy1JustSpawned = True
+enemy2JustSpawned = True
 # Main
 #def main(screen, enemy1, lance, lance_rect, justSpawned, width, height, playerSpeed, white, OFFSCREENDISTANCE):
 while 1:
@@ -74,7 +77,7 @@ while 1:
             textRect.center = (width // 2, height // 2)
             screen.blit(text, textRect)
             pygame.display.update()
-            time.sleep(5)
+            time.sleep(2)
             sys.exit()
 
     if event.type == pygame.KEYDOWN:
@@ -90,17 +93,25 @@ while 1:
         if event.key == pygame.K_DOWN and lance_rect.centery < height:
             lance_rect = lance_rect.move(0,playerSpeed)
 
-    if (enemy1.image_rect.centerx < width + OFFSCREENDISTANCE and enemy1.image_rect.centerx > -OFFSCREENDISTANCE and enemy1.image_rect.centery < height + OFFSCREENDISTANCE and enemy1.image_rect.centery > -OFFSCREENDISTANCE) or justSpawned == True:
+    if (enemy1.image_rect.centerx < width + OFFSCREENDISTANCE and enemy1.image_rect.centerx > -OFFSCREENDISTANCE and enemy1.image_rect.centery < height + OFFSCREENDISTANCE and enemy1.image_rect.centery > -OFFSCREENDISTANCE) or enemy1JustSpawned == True:
             enemy1.image_rect = enemy1.image_rect.move(enemy1.speed)
-            justSpawned = False
+            enemy1JustSpawned = False
     else:
         enemySpawn(enemy1, width, height, OFFSCREENDISTANCE)
-        justSpawned = True
+        enemy1JustSpawned = True
+    
+    if (enemy2.image_rect.centerx < width + OFFSCREENDISTANCE and enemy2.image_rect.centerx > -OFFSCREENDISTANCE and enemy2.image_rect.centery < height + OFFSCREENDISTANCE and enemy2.image_rect.centery > -OFFSCREENDISTANCE) or enemy2JustSpawned == True:
+            enemy2.image_rect = enemy2.image_rect.move(enemy2.speed)
+            enemy2JustSpawned = False
+    else:
+        enemySpawn(enemy2, width, height, OFFSCREENDISTANCE)
+        enemy2JustSpawned = True
+    
 
-    screen.fill(white)
     screen.blit(background, (0,0))
     screen.blit(lance, lance_rect)
     screen.blit(enemy1.loadedImage, enemy1.image_rect)
+    screen.blit(enemy2.loadedImage, enemy2.image_rect)
     pygame.display.flip()
     
     
