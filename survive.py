@@ -7,12 +7,17 @@ white = 255, 255, 255
 
 screen = pygame.display.set_mode(size)
 
-player = "tile024.png"
-
-lance = pygame.image.load(player)
+lance = "tile024.png"
+lance = pygame.image.load(lance)
 lance_rect = lance.get_rect()
 lance_rect.centerx = width/2
 lance_rect.centery = height/2
+
+enemy = "tile036.png"
+enemy = pygame.image.load(enemy)
+enemy_rect = enemy.get_rect()
+enemy_rect.centerx = width/3
+enemy_rect.centery = height/3
 
 while 1:
     for event in pygame.event.get():
@@ -33,4 +38,5 @@ while 1:
 
     screen.fill(white)
     screen.blit(lance, lance_rect)
+    screen.blit(enemy, enemy_rect)
     pygame.display.flip()
