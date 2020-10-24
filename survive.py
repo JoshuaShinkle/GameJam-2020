@@ -19,13 +19,16 @@ while 1:
         if event.type == pygame.QUIT: sys.exit()
 
     if event.type == pygame.KEYDOWN:
-        if event.key == pygame.K_LEFT:
+        if event.key == pygame.K_LEFT and lance_rect.centerx > 0:
             lance_rect = lance_rect.move(-speed,0)
-        if event.key == pygame.K_RIGHT:
+
+        if event.key == pygame.K_RIGHT and lance_rect.centerx < width:
             lance_rect = lance_rect.move(speed,0)
-        if event.key == pygame.K_UP:
+
+        if event.key == pygame.K_UP and lance_rect.centery > 0:
             lance_rect = lance_rect.move(0,-speed)
-        if event.key == pygame.K_DOWN:
+
+        if event.key == pygame.K_DOWN and lance_rect.centery < height:
             lance_rect = lance_rect.move(0,speed)
 
     screen.fill(white)
