@@ -71,14 +71,6 @@ for enemy in enemies:
 while 1:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            score = str(round(float(time.time()-start_time),3))
-            font = pygame.font.Font('freesansbold.ttf', 108)
-            text = font.render("Score: " + score, True, white)
-            textRect = text.get_rect()
-            textRect.center = (width // 2, height // 2)
-            screen.blit(text, textRect)
-            pygame.display.update()
-            time.sleep(2)
             sys.exit()
 
     if event.type == pygame.KEYDOWN:
@@ -108,6 +100,17 @@ while 1:
         enemySpawn(enemy2, width, height, OFFSCREENDISTANCE)
         enemy2.justSpawned = True
     
+    for enemy in enemies:
+        if abs(enemy.image_rect.centerx - lance_rect.centerx) < 32 and abs(enemy.image_rect.centery - lance_rect.centery) < 32:
+            score = str(round(float(time.time()-start_time),3))
+            font = pygame.font.Font('freesansbold.ttf', 108)
+            text = font.render("Score: " + score, True, white)
+            textRect = text.get_rect()
+            textRect.center = (width // 2, height // 2)
+            screen.blit(text, textRect)
+            pygame.display.update()
+            time.sleep(2)
+            sys.exit()
 
     screen.blit(background, (0,0))
     screen.blit(lance, lance_rect)
