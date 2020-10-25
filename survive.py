@@ -25,9 +25,8 @@ enemy1 = Enemy("tile033.png")
 enemy2 = Enemy("tile033.png")
 enemy3 = Enemy("tile033.png")
 enemy4 = Enemy("tile033.png")
-enemy5 = Enemy("tile033.png")
-enemy6 = Enemy("tile040.png")
-enemies = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6]
+zombie = Enemy("tile040.png")
+enemies = [enemy1, enemy2, enemy3, enemy4, zombie]
 
 lance = "tile027.png"
 lance = pygame.image.load(lance)
@@ -122,31 +121,23 @@ while 1:
         enemySpawn(enemy4, width, height, OFFSCREENDISTANCE)
         enemy4.justSpawned = True
 
-    #enemy5
-    if (enemy5.image_rect.centerx < width + OFFSCREENDISTANCE and enemy5.image_rect.centerx > -OFFSCREENDISTANCE and enemy5.image_rect.centery < height + OFFSCREENDISTANCE and enemy5.image_rect.centery > -OFFSCREENDISTANCE) or enemy5.justSpawned == True:
-            enemy5.image_rect = enemy5.image_rect.move(enemy5.speed)
-            enemy5.justSpawned = False
-    else:
-        enemySpawn(enemy5, width, height, OFFSCREENDISTANCE)
-        enemy5.justSpawned = True
-
-    #enemy6
-    if (enemy6.image_rect.centerx < width + OFFSCREENDISTANCE and enemy6.image_rect.centerx > -OFFSCREENDISTANCE and enemy6.image_rect.centery < height + OFFSCREENDISTANCE and enemy6.image_rect.centery > -OFFSCREENDISTANCE) or enemy6.justSpawned == True:
-            if enemy6.image_rect.centerx > lance_rect.centerx:
-                if enemy6.image_rect.centery > lance_rect.centery:
-                    enemy6.image_rect = enemy6.image_rect.move(-2,-2)
+    #zombie
+    if (zombie.image_rect.centerx < width + OFFSCREENDISTANCE and zombie.image_rect.centerx > -OFFSCREENDISTANCE and zombie.image_rect.centery < height + OFFSCREENDISTANCE and zombie.image_rect.centery > -OFFSCREENDISTANCE) or zombie.justSpawned == True:
+            if zombie.image_rect.centerx > lance_rect.centerx:
+                if zombie.image_rect.centery > lance_rect.centery:
+                    zombie.image_rect = zombie.image_rect.move(-2,-2)
                 else:
-                    enemy6.image_rect = enemy6.image_rect.move(-2, 2)
+                    zombie.image_rect = zombie.image_rect.move(-2, 2)
             else:
-                if enemy6.image_rect.centery > lance_rect.centery:
-                    enemy6.image_rect = enemy6.image_rect.move(2,-2)
+                if zombie.image_rect.centery > lance_rect.centery:
+                    zombie.image_rect = zombie.image_rect.move(2,-2)
                 else:
-                    enemy6.image_rect = enemy6.image_rect.move(2, 2)
+                    zombie.image_rect = zombie.image_rect.move(2, 2)
             
-            enemy6.justSpawned = False
+            zombie.justSpawned = False
     else:
-        enemySpawn(enemy6, width, height, OFFSCREENDISTANCE)
-        enemy6.justSpawned = True
+        enemySpawn(zombie, width, height, OFFSCREENDISTANCE)
+        zombie.justSpawned = True
     
     for enemy in enemies:
         if abs(enemy.image_rect.centerx - lance_rect.centerx) < 32 and abs(enemy.image_rect.centery - lance_rect.centery) < 32:
