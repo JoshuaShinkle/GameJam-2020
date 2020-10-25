@@ -148,13 +148,13 @@ while 1:
             screen.blit(lance, lance_rect)
 
             score = str(round(float(time.time()-start_time),3))
-            font = pygame.font.Font('freesansbold.ttf', 108)
-            text = font.render("Score: " + score, True, white)
+            font = pygame.font.Font('freesansbold.ttf', 72)
+            text = font.render("Score: " + score + " secs", True, white)
             textRect = text.get_rect()
             textRect.center = (width // 2, height // 7)
             screen.blit(text, textRect)
             pygame.display.update()
-            time.sleep(2)
+            time.sleep(3)
             sys.exit()
 
     screen.blit(background, (0,0))
