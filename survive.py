@@ -6,9 +6,10 @@ pygame.init()
 size = width, height = 800,600
 playerSpeed = 5
 white = 255, 255, 255
+black = 0, 0, 0
 screen = pygame.display.set_mode(size)
-cobbleStone = "tile012.png"
-background = pygame.image.load(cobbleStone)
+playingField = "tile012.png"
+background = pygame.image.load(playingField)
 background = pygame.transform.scale(background, (800, 600))
 start_time = time.time()
 
@@ -132,11 +133,25 @@ while 1:
     
     for enemy in enemies:
         if abs(enemy.image_rect.centerx - lance_rect.centerx) < 32 and abs(enemy.image_rect.centery - lance_rect.centery) < 32:
+            screen.fill(black)
+
+            endScreen = "tile002.png"
+            background = pygame.image.load(endScreen)
+            background = pygame.transform.scale(background, (800, 600))
+            screen.blit(background, (0,0))
+            
+            lance = "tile030.png"
+            lance = pygame.image.load(lance)
+            lance_rect = lance.get_rect()
+            lance_rect.centerx = width/2
+            lance_rect.centery = height/2
+            screen.blit(lance, lance_rect)
+
             score = str(round(float(time.time()-start_time),3))
             font = pygame.font.Font('freesansbold.ttf', 108)
             text = font.render("Score: " + score, True, white)
             textRect = text.get_rect()
-            textRect.center = (width // 2, height // 2)
+            textRect.center = (width // 2, height // 7)
             screen.blit(text, textRect)
             pygame.display.update()
             time.sleep(2)
