@@ -24,9 +24,8 @@ class Enemy:
 enemy1 = Enemy("tile033.png")
 enemy2 = Enemy("tile033.png")
 enemy3 = Enemy("tile033.png")
-enemy4 = Enemy("tile033.png")
 zombie = Enemy("tile040.png")
-enemies = [enemy1, enemy2, enemy3, enemy4, zombie]
+enemies = [enemy1, enemy2, enemy3, zombie]
 
 lance = "tile027.png"
 lance = pygame.image.load(lance)
@@ -112,14 +111,6 @@ while 1:
     else:
         enemySpawn(enemy3, width, height, OFFSCREENDISTANCE)
         enemy3.justSpawned = True
-
-    #enemy4
-    if (enemy4.image_rect.centerx < width + OFFSCREENDISTANCE and enemy4.image_rect.centerx > -OFFSCREENDISTANCE and enemy4.image_rect.centery < height + OFFSCREENDISTANCE and enemy4.image_rect.centery > -OFFSCREENDISTANCE) or enemy4.justSpawned == True:
-            enemy4.image_rect = enemy4.image_rect.move(enemy4.speed)
-            enemy4.justSpawned = False
-    else:
-        enemySpawn(enemy4, width, height, OFFSCREENDISTANCE)
-        enemy4.justSpawned = True
 
     #zombie
     if (zombie.image_rect.centerx < width + OFFSCREENDISTANCE and zombie.image_rect.centerx > -OFFSCREENDISTANCE and zombie.image_rect.centery < height + OFFSCREENDISTANCE and zombie.image_rect.centery > -OFFSCREENDISTANCE) or zombie.justSpawned == True:
