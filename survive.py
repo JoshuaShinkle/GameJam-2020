@@ -15,18 +15,19 @@ start_time = time.time()
 
 # Character Setup
 class Enemy:
-    def __init__(self):
-        self.imageName = "tile033.png"
+    def __init__(self, imageName):
+        self.imageName = imageName
         self.loadedImage = pygame.image.load(self.imageName)
         self.image_rect = self.loadedImage.get_rect()
         self.speed = [0,0]
         self.justSpawned = True
-enemy1 = Enemy()
-enemy2 = Enemy()
-enemy3 = Enemy()
-enemy4 = Enemy()
-enemy5 = Enemy()
-enemies = [enemy1, enemy2, enemy3, enemy4, enemy5]
+enemy1 = Enemy("tile033.png")
+enemy2 = Enemy("tile033.png")
+enemy3 = Enemy("tile033.png")
+enemy4 = Enemy("tile033.png")
+enemy5 = Enemy("tile033.png")
+enemy6 = Enemy("tile040.png")
+enemies = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6]
 
 lance = "tile027.png"
 lance = pygame.image.load(lance)
@@ -69,8 +70,8 @@ def enemySpawn(enemy, width, height, OFFSCREENDISTANCE):
 for enemy in enemies:
     enemySpawn(enemy, width, height, OFFSCREENDISTANCE)
     enemy.justSpawned = True
+
 # Main
-#def main(screen, enemy1, lance, lance_rect, justSpawned, width, height, playerSpeed, white, OFFSCREENDISTANCE):
 while 1:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -128,6 +129,14 @@ while 1:
     else:
         enemySpawn(enemy5, width, height, OFFSCREENDISTANCE)
         enemy5.justSpawned = True
+
+    #enemy6
+    if (enemy6.image_rect.centerx < width + OFFSCREENDISTANCE and enemy6.image_rect.centerx > -OFFSCREENDISTANCE and enemy6.image_rect.centery < height + OFFSCREENDISTANCE and enemy6.image_rect.centery > -OFFSCREENDISTANCE) or enemy6.justSpawned == True:
+            enemy6.image_rect = enemy6.image_rect.move(enemy6.speed)
+            enemy6.justSpawned = False
+    else:
+        enemySpawn(enemy6, width, height, OFFSCREENDISTANCE)
+        enemy6.justSpawned = True
     
     for enemy in enemies:
         if abs(enemy.image_rect.centerx - lance_rect.centerx) < 32 and abs(enemy.image_rect.centery - lance_rect.centery) < 32:
@@ -146,7 +155,3 @@ while 1:
     for enemy in enemies:
         screen.blit(enemy.loadedImage, enemy.image_rect)
     pygame.display.flip()
-    
-    
-""" while 1:
-    main(screen, enemy1, lance, lance_rect, justSpawned, width, height, playerSpeed, white, OFFSCREENDISTANCE) """
