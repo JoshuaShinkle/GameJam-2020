@@ -23,7 +23,10 @@ class Enemy:
         self.justSpawned = True
 enemy1 = Enemy()
 enemy2 = Enemy()
-enemies = [enemy1,enemy2]
+enemy3 = Enemy()
+enemy4 = Enemy()
+enemy5 = Enemy()
+enemies = [enemy1, enemy2, enemy3, enemy4, enemy5]
 
 lance = "tile027.png"
 lance = pygame.image.load(lance)
@@ -41,23 +44,23 @@ def enemySpawn(enemy, width, height, OFFSCREENDISTANCE):
     if spawnSide == 0:
         enemySpawnx = -OFFSCREENDISTANCE
         enemySpawny = random.randint(0, height)
-        speedX = random.randint(1,6)
+        speedX = random.randint(4,8)
         speedY = random.randint(-3,3)
     elif spawnSide == 1:
         enemySpawnx = random.randint(0, width)
         enemySpawny = -OFFSCREENDISTANCE
         speedX = random.randint(-3,3)
-        speedY = random.randint(1,6)
+        speedY = random.randint(4,8)
     elif spawnSide == 2:
         enemySpawnx = width + OFFSCREENDISTANCE
         enemySpawny = random.randint(0, height)
-        speedX = random.randint(-6,-1)
+        speedX = random.randint(-8,-4)
         speedY = random.randint(-3,3)
     elif spawnSide == 3:
         enemySpawnx = random.randint(0, width)
         enemySpawny = height + OFFSCREENDISTANCE
         speedX = random.randint(-3,3)
-        speedY = random.randint(-6,-1)
+        speedY = random.randint(-8,-4)
 
     enemy.image_rect.centerx = enemySpawnx
     enemy.image_rect.centery = enemySpawny
@@ -86,6 +89,7 @@ while 1:
         if event.key == pygame.K_DOWN and lance_rect.centery < height:
             lance_rect = lance_rect.move(0,playerSpeed)
     
+    #enemy1
     if (enemy1.image_rect.centerx < width + OFFSCREENDISTANCE and enemy1.image_rect.centerx > -OFFSCREENDISTANCE and enemy1.image_rect.centery < height + OFFSCREENDISTANCE and enemy1.image_rect.centery > -OFFSCREENDISTANCE) or enemy1.justSpawned == True:
             enemy1.image_rect = enemy1.image_rect.move(enemy1.speed)
             enemy1.justSpawned = False
@@ -93,12 +97,37 @@ while 1:
         enemySpawn(enemy1, width, height, OFFSCREENDISTANCE)
         enemy1.justSpawned = True
     
+    #enemy2
     if (enemy2.image_rect.centerx < width + OFFSCREENDISTANCE and enemy2.image_rect.centerx > -OFFSCREENDISTANCE and enemy2.image_rect.centery < height + OFFSCREENDISTANCE and enemy2.image_rect.centery > -OFFSCREENDISTANCE) or enemy2.justSpawned == True:
             enemy2.image_rect = enemy2.image_rect.move(enemy2.speed)
             enemy2.justSpawned = False
     else:
         enemySpawn(enemy2, width, height, OFFSCREENDISTANCE)
         enemy2.justSpawned = True
+
+    #enemy3
+    if (enemy3.image_rect.centerx < width + OFFSCREENDISTANCE and enemy3.image_rect.centerx > -OFFSCREENDISTANCE and enemy3.image_rect.centery < height + OFFSCREENDISTANCE and enemy3.image_rect.centery > -OFFSCREENDISTANCE) or enemy3.justSpawned == True:
+            enemy3.image_rect = enemy3.image_rect.move(enemy3.speed)
+            enemy3.justSpawned = False
+    else:
+        enemySpawn(enemy3, width, height, OFFSCREENDISTANCE)
+        enemy3.justSpawned = True
+
+    #enemy4
+    if (enemy4.image_rect.centerx < width + OFFSCREENDISTANCE and enemy4.image_rect.centerx > -OFFSCREENDISTANCE and enemy4.image_rect.centery < height + OFFSCREENDISTANCE and enemy4.image_rect.centery > -OFFSCREENDISTANCE) or enemy4.justSpawned == True:
+            enemy4.image_rect = enemy4.image_rect.move(enemy4.speed)
+            enemy4.justSpawned = False
+    else:
+        enemySpawn(enemy4, width, height, OFFSCREENDISTANCE)
+        enemy4.justSpawned = True
+
+    #enemy5
+    if (enemy5.image_rect.centerx < width + OFFSCREENDISTANCE and enemy5.image_rect.centerx > -OFFSCREENDISTANCE and enemy5.image_rect.centery < height + OFFSCREENDISTANCE and enemy5.image_rect.centery > -OFFSCREENDISTANCE) or enemy5.justSpawned == True:
+            enemy5.image_rect = enemy5.image_rect.move(enemy5.speed)
+            enemy5.justSpawned = False
+    else:
+        enemySpawn(enemy5, width, height, OFFSCREENDISTANCE)
+        enemy5.justSpawned = True
     
     for enemy in enemies:
         if abs(enemy.image_rect.centerx - lance_rect.centerx) < 32 and abs(enemy.image_rect.centery - lance_rect.centery) < 32:
