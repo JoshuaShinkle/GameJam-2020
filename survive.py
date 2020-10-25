@@ -132,7 +132,17 @@ while 1:
 
     #enemy6
     if (enemy6.image_rect.centerx < width + OFFSCREENDISTANCE and enemy6.image_rect.centerx > -OFFSCREENDISTANCE and enemy6.image_rect.centery < height + OFFSCREENDISTANCE and enemy6.image_rect.centery > -OFFSCREENDISTANCE) or enemy6.justSpawned == True:
-            enemy6.image_rect = enemy6.image_rect.move(enemy6.speed)
+            if enemy6.image_rect.centerx > lance_rect.centerx:
+                if enemy6.image_rect.centery > lance_rect.centery:
+                    enemy6.image_rect = enemy6.image_rect.move(-2,-2)
+                else:
+                    enemy6.image_rect = enemy6.image_rect.move(-2, 2)
+            else:
+                if enemy6.image_rect.centery > lance_rect.centery:
+                    enemy6.image_rect = enemy6.image_rect.move(2,-2)
+                else:
+                    enemy6.image_rect = enemy6.image_rect.move(2, 2)
+            
             enemy6.justSpawned = False
     else:
         enemySpawn(enemy6, width, height, OFFSCREENDISTANCE)
